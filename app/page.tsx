@@ -12,77 +12,17 @@ import FinalSurprise from "@/components/FinalSurprise";
 
 const imagesToPreload = [
   "/images/ebtisam-01.jpg",
-  "/images/ebtisam-02.jpg",
-  "/images/ebtisam-03.jpg",
-  "/images/ebtisam-04.jpg",
-  "/images/ebtisam-05.jpg",
-  "/images/ebtisam-final.jpg",
 ];
 
 const floatingHearts = [
-  {
-    left: "8%",
-    delay: 0,
-    duration: 7,
-    size: "text-lg",
-  },
-  {
-    left: "22%",
-    delay: 2,
-    duration: 9,
-    size: "text-sm",
-  },
-  {
-    left: "42%",
-    delay: 1,
-    duration: 8,
-    size: "text-xl",
-  },
-  {
-    left: "65%",
-    delay: 3,
-    duration: 10,
-    size: "text-sm",
-  },
-  {
-    left: "82%",
-    delay: 1.5,
-    duration: 8.5,
-    size: "text-lg",
-  },
+  { left: "15%", delay: 0, duration: 9, size: "text-sm" },
+  { left: "50%", delay: 2, duration: 10, size: "text-lg" },
+  { left: "82%", delay: 4, duration: 9, size: "text-sm" },
 ];
-
 const sparkles = [
-  {
-    left: "12%",
-    top: "18%",
-    delay: 0,
-  },
-  {
-    left: "85%",
-    top: "20%",
-    delay: 1.2,
-  },
-  {
-    left: "18%",
-    top: "65%",
-    delay: 2,
-  },
-  {
-    left: "78%",
-    top: "70%",
-    delay: 0.8,
-  },
-  {
-    left: "50%",
-    top: "12%",
-    delay: 1.7,
-  },
-  {
-    left: "55%",
-    top: "85%",
-    delay: 2.5,
-  },
+  { left: "15%", top: "20%", delay: 0 },
+  { left: "82%", top: "25%", delay: 1.5 },
+  { left: "55%", top: "80%", delay: 2.5 },
 ];
 
 export default function Home() {
