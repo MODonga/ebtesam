@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 interface BirthdayProps {
@@ -8,10 +9,9 @@ interface BirthdayProps {
 
 export default function Birthday({ onNext }: BirthdayProps) {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#FFF8F8] flex flex-col items-center justify-center px-6 text-center">
-      {/* خلفية متحركة */}
+    <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-[#FFF8F8] px-5 py-8 text-center">
       <motion.div
-        className="absolute -top-32 -left-32 w-72 h-72 rounded-full bg-[#E8A0A8]/20 blur-3xl"
+        className="absolute -left-32 -top-32 h-72 w-72 rounded-full bg-[#E8A0A8]/20 blur-3xl"
         animate={{
           x: [0, 30, 0],
           y: [0, 20, 0],
@@ -25,7 +25,7 @@ export default function Birthday({ onNext }: BirthdayProps) {
       />
 
       <motion.div
-        className="absolute -bottom-32 -right-32 w-72 h-72 rounded-full bg-[#C9A45C]/10 blur-3xl"
+        className="absolute -bottom-32 -right-32 h-72 w-72 rounded-full bg-[#C9A45C]/10 blur-3xl"
         animate={{
           x: [0, -25, 0],
           y: [0, -20, 0],
@@ -38,116 +38,84 @@ export default function Birthday({ onNext }: BirthdayProps) {
         }}
       />
 
-      {/* المحتوى */}
-      <div className="relative z-10 flex flex-col items-center">
-        {/* الصورة */}
+      <div className="relative z-10 flex w-full max-w-md flex-col items-center">
         <motion.div
-          initial={{
-            opacity: 0,
-            scale: 0.8,
-          }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-          }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{
-            duration: 1.2,
+            duration: 1,
             ease: "easeOut",
           }}
-          className="relative"
+          className="relative w-[78vw] max-w-[300px]"
         >
-          <div className="absolute inset-0 rounded-[2rem] bg-[#E8A0A8]/20 blur-2xl scale-110" />
+          <div className="absolute inset-0 scale-105 rounded-[2rem] bg-[#E8A0A8]/20 blur-2xl" />
 
-          <img
-            src="/images/ebtisam-01.jpg"
-            alt="ابتسام"
-            className="
-              relative
-              w-64
-              h-80
-              object-cover
-              rounded-[2rem]
-              shadow-2xl
-            "
-          />
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-2xl">
+            <Image
+              src="/images/ebtisam-01.jpg"
+              alt="ابتسام"
+              fill
+              sizes="(max-width: 640px) 78vw, 300px"
+              priority
+              className="object-cover"
+            />
+          </div>
         </motion.div>
 
-        {/* الاسم */}
         <motion.h1
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{
-            duration: 0.8,
-            delay: 0.7,
-            ease: "easeOut",
+            duration: 0.7,
+            delay: 0.5,
           }}
-          className="mt-7 text-[#B76E79] text-4xl font-bold"
+          className="mt-6 text-3xl font-bold text-[#B76E79]"
         >
-          ابتسام ❤️
+          أيوه هي دي 😂❤️
         </motion.h1>
 
-        {/* الرسالة */}
         <motion.p
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{
-            duration: 0.8,
-            delay: 1.2,
-            ease: "easeOut",
+            duration: 0.7,
+            delay: 0.9,
           }}
-          className="mt-5 text-[#2B2022] text-lg leading-relaxed"
+          className="mt-4 text-lg leading-8 text-[#2B2022]"
         >
-          أيوه...
+          مين غيرك يعني؟ 😂
           <br />
-          انتي المقصودة 😂
+          الموقع ده كله معمول عشان واحدة اسمها ابتسام ❤️
         </motion.p>
 
-        {/* الزر */}
         <motion.button
-          initial={{
-            opacity: 0,
-            y: 20,
-            scale: 0.9,
-          }}
+          initial={{ opacity: 0, y: 20, scale: 0.9 }}
           animate={{
             opacity: 1,
             y: 0,
             scale: 1,
           }}
           transition={{
-            duration: 0.8,
-            delay: 1.8,
-            ease: "easeOut",
+            duration: 0.7,
+            delay: 1.3,
           }}
           onClick={onNext}
           className="
-            mt-8
-            bg-[#E8A0A8]
-            text-[#2B2022]
-            px-8
-            py-4
+            mt-7
+            min-h-12
             rounded-full
+            bg-[#E8A0A8]
+            px-8
+            py-3
             text-lg
             font-semibold
+            text-[#2B2022]
             shadow-lg
-            hover:scale-105
-            active:scale-95
             transition-transform
+            active:scale-95
           "
         >
-          كملي ❤️
+          طيب كملي بقى ❤️
         </motion.button>
       </div>
     </section>

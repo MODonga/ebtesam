@@ -38,77 +38,84 @@ export default function NameReveal({ onNext }: NameRevealProps) {
   }, [visibleLetters, onNext]);
 
   return (
-    <section className="min-h-screen bg-[#FFF8F8] flex flex-col items-center justify-center px-6 text-center overflow-hidden">
-
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 0.8,
-          ease: "easeOut",
-        }}
-        className="text-[#B76E79] text-xl mb-6"
-      >
-        الشخص ده...
-      </motion.p>
-
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{
-          duration: 0.8,
-          delay: 1,
-        }}
-        className="text-[#2B2022] text-2xl font-semibold mb-8"
-      >
-        اسمها...
-      </motion.p>
-
-      <motion.div
-        initial={{
-          opacity: 0,
-          filter: "blur(20px)",
-          scale: 0.8,
-        }}
-        animate={{
-          opacity: 1,
-          filter: "blur(0px)",
-          scale: 1,
-        }}
-        transition={{
-          duration: 1.5,
-          delay: 1.6,
-          ease: "easeOut",
-        }}
-        className="min-h-[90px] flex items-center justify-center"
-      >
-        <h1
-          dir="rtl"
-          className="text-[#B76E79] text-5xl font-bold tracking-wide"
+    <section className="flex min-h-[100svh] items-center justify-center overflow-hidden bg-[#FFF8F8] px-6 text-center">
+      <div className="flex flex-col items-center">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-xl text-[#B76E79]"
         >
-          {name.slice(0, visibleLetters)}
-        </h1>
-      </motion.div>
+          طيب... 👀
+        </motion.p>
 
-      {visibleLetters === name.length && (
-        <motion.div
-          initial={{
-            opacity: 0,
-            scale: 0.3,
-          }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-          }}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{
-            duration: 0.7,
-            ease: "backOut",
+            duration: 0.8,
+            delay: 0.8,
           }}
-          className="mt-6 text-4xl"
+          className="mt-4 text-xl font-semibold text-[#2B2022]"
         >
-          ❤️
-        </motion.div>
-      )}
+          إنتي عارفة إحنا هنا عشان مين؟
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: 0.8,
+            delay: 1.5,
+          }}
+          className="mt-3 text-base text-[#B76E79]"
+        >
+          خليني أفكرك...
+        </motion.p>
+
+        <div className="mt-8 flex min-h-[90px] items-center justify-center">
+          <motion.h1
+            initial={{
+              opacity: 0,
+              filter: "blur(15px)",
+              scale: 0.8,
+            }}
+            animate={{
+              opacity: 1,
+              filter: "blur(0px)",
+              scale: 1,
+            }}
+            transition={{
+              duration: 1,
+              delay: 1.8,
+            }}
+            dir="rtl"
+            className="text-5xl font-bold tracking-wide text-[#B76E79]"
+          >
+            {name.slice(0, visibleLetters)}
+          </motion.h1>
+        </div>
+
+        {visibleLetters === name.length && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.3 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 0.7,
+              ease: "backOut",
+            }}
+            className="mt-5"
+          >
+            <p className="text-2xl font-semibold text-[#2B2022]">
+              أيوه... إنتي يا ابتسام ❤️
+            </p>
+
+            <p className="mt-2 text-base text-[#B76E79]">
+              متستغربيش... كملي بس 😂
+            </p>
+          </motion.div>
+        )}
+      </div>
     </section>
   );
 }
