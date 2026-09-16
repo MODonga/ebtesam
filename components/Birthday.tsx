@@ -85,7 +85,7 @@ export default function Birthday({ onNext }: BirthdayProps) {
         >
           مين غيرك يعني؟ 😂
           <br />
-          الموقع ده كله معمول عشان واحدة اسمها ابتسام ❤️
+         دي حاجة بسيطة قدرت ادمج فيها شغلي و حبي للبنت بتاعتي ✨ابتسام✨❤️
         </motion.p>
 
         <motion.button
@@ -115,7 +115,7 @@ export default function Birthday({ onNext }: BirthdayProps) {
             active:scale-95
           "
         >
-          طيب كملي بقى ❤️
+          طيب كملي بقا ❤️
         </motion.button>
       </div>
     </section>

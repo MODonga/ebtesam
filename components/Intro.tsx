@@ -62,7 +62,7 @@ export default function Intro({ onNext }: IntroProps) {
               active:scale-95
             "
           >
-            افتحيها بقى 🎁
+            افتحيها بقا 🎁
           </button>
         </motion.div>
       </div>

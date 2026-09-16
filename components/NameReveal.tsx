@@ -27,15 +27,15 @@ export default function NameReveal({ onNext }: NameRevealProps) {
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    if (visibleLetters === name.length) {
-      const timer = setTimeout(() => {
-        onNext();
-      }, 1800);
+ useEffect(() => {
+  if (visibleLetters === name.length) {
+    const timer = setTimeout(() => {
+      onNext();
+    }, 10000);
 
-      return () => clearTimeout(timer);
-    }
-  }, [visibleLetters, onNext]);
+    return () => clearTimeout(timer);
+  }
+}, [visibleLetters, onNext]);
 
   return (
     <section className="flex min-h-[100svh] items-center justify-center overflow-hidden bg-[#FFF8F8] px-6 text-center">
