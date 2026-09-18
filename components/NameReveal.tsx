@@ -107,7 +107,7 @@ export default function NameReveal({ onNext }: NameRevealProps) {
             className="mt-5"
           >
             <p className="text-2xl font-semibold text-[#2B2022]">
-              أيوه... إنتي يا ابتسام ❤️
+              أيوه... إنتي يا بسبوسه ❤️
             </p>
 
             <p className="mt-2 text-base text-[#B76E79]">

@@ -5,82 +5,52 @@ import { useEffect, useRef, useState } from "react";
 
 import Intro from "@/components/Intro";
 import NameReveal from "@/components/NameReveal";
+import BirthdayCake from "@/components/BirthdayCake";
 import Birthday from "@/components/Birthday";
 import Message from "@/components/Message";
 import Gallery from "@/components/Gallery";
 import FinalSurprise from "@/components/FinalSurprise";
 
-const imagesToPreload = [
-  "/images/ebtisam-01.jpg",
-  "/images/ebtisam-02.jpg",
-  "/images/ebtisam-03.jpg",
-  "/images/ebtisam-04.jpg",
-  "/images/ebtisam-05.jpg",
-  "/images/ebtisam-final.jpg",
-];
+// Preload only the first image.
+// The other images will be loaded by Next/Image when needed.
+const imagesToPreload = ["/images/ebtisam-01.jpg"];
 
+// Keep background animations light for mobile performance.
 const floatingHearts = [
   {
-    left: "8%",
+    left: "15%",
     delay: 0,
-    duration: 7,
-    size: "text-lg",
-  },
-  {
-    left: "22%",
-    delay: 2,
     duration: 9,
     size: "text-sm",
   },
   {
-    left: "42%",
-    delay: 1,
-    duration: 8,
-    size: "text-xl",
-  },
-  {
-    left: "65%",
-    delay: 3,
+    left: "50%",
+    delay: 2,
     duration: 10,
-    size: "text-sm",
+    size: "text-lg",
   },
   {
     left: "82%",
-    delay: 1.5,
-    duration: 8.5,
-    size: "text-lg",
+    delay: 4,
+    duration: 9,
+    size: "text-sm",
   },
 ];
 
 const sparkles = [
   {
-    left: "12%",
-    top: "18%",
+    left: "15%",
+    top: "20%",
     delay: 0,
   },
   {
-    left: "85%",
-    top: "20%",
-    delay: 1.2,
-  },
-  {
-    left: "18%",
-    top: "65%",
-    delay: 2,
-  },
-  {
-    left: "78%",
-    top: "70%",
-    delay: 0.8,
-  },
-  {
-    left: "50%",
-    top: "12%",
-    delay: 1.7,
+    left: "82%",
+    top: "25%",
+    delay: 1.5,
   },
   {
     left: "55%",
-    top: "85%",
+    top: "80%",
     delay: 2.5,
   },
 ];
@@ -93,7 +63,7 @@ export default function Home() {
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Preload images
+  // Preload first image only
   useEffect(() => {
     let loadedImages = 0;
 
@@ -110,15 +80,15 @@ export default function Home() {
 
       image.onload = finishLoading;
       image.onerror = finishLoading;
-
       image.src = src;
 
       return image;
     });
 
+    // Don't keep the user on the loading screen for too long.
     const fallbackTimer = setTimeout(() => {
       setIsLoading(false);
-    }, 5000);
+    }, 2500);
 
     return () => {
       clearTimeout(fallbackTimer);
@@ -130,6 +100,7 @@ export default function Home() {
     };
   }, []);
 
+  // Start website experience + music
   const startExperience = async () => {
     if (audioRef.current) {
       try {
@@ -143,6 +114,7 @@ export default function Home() {
     setCurrentStep(1);
   };
 
+  // Mute / unmute music
   const toggleMute = () => {
     if (!audioRef.current) return;
 
@@ -154,13 +126,15 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#FFF8F8]">
-      {/* Loading Screen */}
+      {/* =========================
+          Loading Screen
+      ========================== */}
       <AnimatePresence>
         {isLoading && (
           <motion.div
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
             className="
               fixed
               inset-0
@@ -173,18 +147,33 @@ export default function Home() {
             "
           >
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.8 }}
+              initial={{
+                scale: 0.8,
+                opacity: 0,
+              }}
+              animate={{
+                scale: 1,
+                opacity: 1,
+              }}
+              transition={{ duration: 0.7 }}
               className="text-5xl"
             >
               ❤️
             </motion.div>
 
             <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              initial={{
+                opacity: 0,
+                y: 10,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.7,
+                delay: 0.2,
+              }}
               className="
                 mt-6
                 text-lg
@@ -195,7 +184,7 @@ export default function Home() {
               Loading your surprise...
             </motion.p>
 
-            <motion.div
+            <div
               className="
                 mt-6
                 h-1
@@ -206,7 +195,11 @@ export default function Home() {
               "
             >
               <motion.div
-                className="h-full rounded-full bg-[#B76E79]"
+                className="
+                  h-full
+                  rounded-full
+                  bg-[#B76E79]
+                "
                 initial={{ x: "-100%" }}
                 animate={{ x: "100%" }}
                 transition={{
@@ -215,12 +208,14 @@ export default function Home() {
                   ease: "easeInOut",
                 }}
               />
-            </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Background Floating Hearts */}
+      {/* =========================
+          Floating Background
+      ========================== */}
       {!isLoading && (
         <>
           {floatingHearts.map((heart, index) => (
@@ -243,7 +238,7 @@ export default function Home() {
               }}
               animate={{
                 y: "-110vh",
-                opacity: [0, 0.45, 0.3, 0],
+                opacity: [0, 0.35, 0.2, 0],
                 scale: [0.7, 1, 0.85],
               }}
               transition={{
@@ -257,7 +252,6 @@ export default function Home() {
             </motion.div>
           ))}
 
-          {/* Sparkles */}
           {sparkles.map((sparkle, index) => (
             <motion.div
               key={`sparkle-${index}`}
@@ -273,12 +267,11 @@ export default function Home() {
                 top: sparkle.top,
               }}
               animate={{
-                opacity: [0, 1, 0],
-                scale: [0.6, 1.2, 0.6],
-                rotate: [0, 90, 180],
+                opacity: [0, 0.8, 0],
+                scale: [0.7, 1.1, 0.7],
               }}
               transition={{
-                duration: 2.8,
+                duration: 3,
                 delay: sparkle.delay,
                 repeat: Infinity,
                 ease: "easeInOut",
@@ -290,7 +283,9 @@ export default function Home() {
         </>
       )}
 
-      {/* Background Music */}
+      {/* =========================
+          Background Music
+      ========================== */}
       <audio
         ref={audioRef}
         src="/music/birthday.mp3"
@@ -298,11 +293,19 @@ export default function Home() {
         preload="auto"
       />
 
-      {/* Music Control */}
+      {/* =========================
+          Music Control
+      ========================== */}
       {!isLoading && currentStep > 0 && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{
+            opacity: 0,
+            scale: 0.8,
+          }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+          }}
           className="fixed right-4 top-4 z-50"
         >
           <button
@@ -320,7 +323,6 @@ export default function Home() {
               shadow-lg
               backdrop-blur-sm
               transition-transform
-              hover:scale-105
               active:scale-95
             "
           >
@@ -329,7 +331,9 @@ export default function Home() {
         </motion.div>
       )}
 
-      {/* Scenes */}
+      {/* =========================
+          Scenes
+      ========================== */}
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={currentStep}
@@ -346,46 +350,85 @@ export default function Home() {
             y: -20,
           }}
           transition={{
-            duration: 0.6,
+            duration: 0.5,
             ease: "easeInOut",
           }}
-          className="relative z-10"
+          className="
+            relative
+            z-10
+            mx-auto
+            w-full
+            max-w-[500px]
+            overflow-hidden
+            bg-[#FFF8F8]
+            shadow-2xl
+          "
         >
-          {/* Stage 1 - Intro */}
+          {/* =========================
+              Stage 1
+              Intro
+          ========================== */}
           {currentStep === 0 && (
-            <Intro onNext={startExperience} />
+            <Intro
+              onNext={startExperience}
+            />
           )}
 
-          {/* Stage 2 - Name Reveal */}
+          {/* =========================
+              Stage 2
+              Name Reveal
+          ========================== */}
           {currentStep === 1 && (
             <NameReveal
               onNext={() => setCurrentStep(2)}
             />
           )}
 
-          {/* Stage 3 - Birthday Image */}
+          {/* =========================
+              Stage 3
+              Birthday Cake
+          ========================== */}
           {currentStep === 2 && (
-            <Birthday
+            <BirthdayCake
               onNext={() => setCurrentStep(3)}
             />
           )}
 
-          {/* Stage 4 - Messages */}
+          {/* =========================
+              Stage 4
+              Birthday Image
+          ========================== */}
           {currentStep === 3 && (
-            <Message
+            <Birthday
               onNext={() => setCurrentStep(4)}
             />
           )}
 
-          {/* Stage 5 - Gallery */}
+          {/* =========================
+              Stage 5
+              Messages
+          ========================== */}
           {currentStep === 4 && (
-            <Gallery
+            <Message
               onNext={() => setCurrentStep(5)}
             />
           )}
 
-          {/* Stage 6 - Final Surprise */}
+          {/* =========================
+              Stage 6
+              Gallery
+          ========================== */}
           {currentStep === 5 && (
+            <Gallery
+              onNext={() => setCurrentStep(6)}
+            />
+          )}
+
+          {/* =========================
+              Stage 7
+              Final Surprise
+          ========================== */}
+          {currentStep === 6 && (
             <FinalSurprise />
           )}
         </motion.div>
