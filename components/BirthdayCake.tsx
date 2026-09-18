@@ -18,7 +18,7 @@ export default function BirthdayCake({
 
     const timer = setTimeout(() => {
       onNext();
-    }, 3500);
+    }, 8000);
 
     return () => clearTimeout(timer);
   }, [blown, onNext]);
