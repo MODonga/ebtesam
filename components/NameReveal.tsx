@@ -27,19 +27,11 @@ export default function NameReveal({ onNext }: NameRevealProps) {
     return () => clearInterval(timer);
   }, []);
 
- useEffect(() => {
-  if (visibleLetters === name.length) {
-    const timer = setTimeout(() => {
-      onNext();
-    }, 10000);
-
-    return () => clearTimeout(timer);
-  }
-}, [visibleLetters, onNext]);
-
   return (
     <section className="flex min-h-[100svh] items-center justify-center overflow-hidden bg-[#FFF8F8] px-6 text-center">
       <div className="flex flex-col items-center">
+
+        {/* Intro */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -73,6 +65,7 @@ export default function NameReveal({ onNext }: NameRevealProps) {
           خليني أفكرك...
         </motion.p>
 
+        {/* Name */}
         <div className="mt-8 flex min-h-[90px] items-center justify-center">
           <motion.h1
             initial={{
@@ -96,15 +89,22 @@ export default function NameReveal({ onNext }: NameRevealProps) {
           </motion.h1>
         </div>
 
+        {/* After name */}
         {visibleLetters === name.length && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.3 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{
+              opacity: 0,
+              scale: 0.3,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
             transition={{
               duration: 0.7,
               ease: "backOut",
             }}
-            className="mt-5"
+            className="mt-5 flex flex-col items-center"
           >
             <p className="text-2xl font-semibold text-[#2B2022]">
               أيوه... إنتي يا بسبوسه ❤️
@@ -113,6 +113,27 @@ export default function NameReveal({ onNext }: NameRevealProps) {
             <p className="mt-2 text-base text-[#B76E79]">
               متستغربيش... كملي بس 😂
             </p>
+
+            {/* Continue Button */}
+            <motion.button
+              initial={{
+                opacity: 0,
+                y: 15,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.6,
+                delay: 0.4,
+              }}
+              onClick={onNext}
+              whileTap={{ scale: 0.95 }}
+              className="mt-7 min-h-12 rounded-full bg-[#E8A0A8] px-8 py-3 text-lg font-semibold text-[#2B2022] shadow-lg shadow-[#E8A0A8]/20"
+            >
+              حاضر هكمل اهو ❤️
+            </motion.button>
           </motion.div>
         )}
       </div>
